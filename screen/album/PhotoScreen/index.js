@@ -85,6 +85,12 @@ class PhotoScreen extends Component {
               onPress={() => this.setState({number: number + 10})}
             />
           </View>
+          <View>
+            <Button
+              title="< Go Back"
+              onPress={() => this.props.navigation.navigate('Album')}
+            />
+          </View>
           <View style={{display: prevDisplay}}>
             <Button
               title="<< Prev"

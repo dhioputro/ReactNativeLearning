@@ -28,6 +28,9 @@ import {
   Home
 } from './screen'
 
+import AlbumScreen from './screen/album/AlbumScreen';
+import PhotoScreen from './screen/album/PhotoScreen';
+
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
@@ -107,8 +110,8 @@ class App extends Component {
   render() {  
     return(
       <NavigationContainer style={styles.container}>
-        {console.log('status login ' +this.state.isLogin)}
-        {console.log('ini user login ' +this.state.userLogin)}
+        {/* {console.log('status login ' +this.state.isLogin)}
+        {console.log('ini user login ' +this.state.userLogin)} */}
         {this.state.isLogin === false ? (
           <Stack.Navigator>
             <Stack.Screen
@@ -138,7 +141,7 @@ class App extends Component {
               )}
             </Drawer.Screen>
 
-            <Drawer.Screen name="EditUser" >
+            {/* <Drawer.Screen name="EditUser" >
               {(props) => (
                 <Edit
                   {...props}
@@ -146,12 +149,21 @@ class App extends Component {
                   indexUser={this.state.listIndex}
                   fnEditUser={this.editUser} />
               )}
-            </Drawer.Screen>
+            </Drawer.Screen> */}
 
             <Drawer.Screen
               name="Album"
               children={(props) => (
-                <Album 
+                <AlbumScreen 
+                  {...props} 
+                  loginStatusChange={this.authLogin} />
+              )}
+            />
+
+            <Drawer.Screen
+              name="Photo"
+              children={(props) => (
+                <PhotoScreen
                   {...props} 
                   loginStatusChange={this.authLogin} />
               )}

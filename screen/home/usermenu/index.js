@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import {Button, Alert} from 'react-native';
+import {
+  Button, 
+  Alert, 
+  RefreshControl, 
+  View
+} from 'react-native';
 import {ListItem, Avatar} from 'react-native-elements';
-// import TouchableScale from 'react-native-touchable-scale'; 
-// import LinearGradient from 'react-native-linear-gradient';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {FlatList} from 'react-native-gesture-handler';
 
@@ -11,6 +15,7 @@ class UserMenu extends Component {
     super(props);
     this.state = {
       list: [],
+      refreshing: false
       // showUser: 10,
     };
   }
@@ -18,6 +23,9 @@ class UserMenu extends Component {
   componentDidMount() {
     this.props.userlist;
   }
+  _onRefresh = () => {
+    this.setState({refreshing: true});
+}
 
   keyExtractor = (item, index) => index.toString()
 
@@ -34,7 +42,6 @@ class UserMenu extends Component {
           title="Edit"
           onPress={() => {
             this.props.editUser(item, index);
-            Alert.alert(`Notice`, `Data user  ${item.username} telah diubah`);
             this.props.navigation.navigate('UserList')
           }} />
         
@@ -43,7 +50,7 @@ class UserMenu extends Component {
           title="Del"
           onPress={() => {
             this.props.deleteUser(item, index);
-            this.props.navigation.navigate('UserList')
+            this.props.navigation.navigate('EditData')
           }} />
       
 
@@ -53,11 +60,22 @@ class UserMenu extends Component {
 
   render() {
     return (
+      <View>
         <FlatList 
-        keyExtractor={this.keyExtractor}
-        data={this.props.userlist}
-        renderItem={this.renderItem}
+          keyExtractor={this.keyExtractor}
+          data={this.props.userlist}
+          extraData={this.props.userlist}
+          renderItem={this.renderItem}
+          refreshControl={
+            <RefreshControl 
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+              
+            />
+          }
         />
+      </View>
+        
     );
   }
 }

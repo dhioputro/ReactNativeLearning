@@ -3,7 +3,8 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import UserMenu from './usermenu'
+import UserMenu from './usermenu';
+
 
 const Stack = createStackNavigator();
 
@@ -23,12 +24,12 @@ class Home extends Component {
       <Stack.Navigator>
         <Stack.Screen 
           name="UserList">
-        {(props) => (
-          <UserMenu 
-            {...props} 
-            userlist={this.props.userlist}
-            deleteUser={this.props.deleteUser} />
-        )}
+          {(props) => (
+            <UserMenu 
+              {...props} 
+              userlist={this.props.userlist}
+              deleteUser={this.props.deleteUser} />
+          )}
         </Stack.Screen>
       </Stack.Navigator>
     );

@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default class AlbumScreen extends Component {
+class AlbumScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +47,7 @@ export default class AlbumScreen extends Component {
   };
 
   onPressAlbumHandler = (album) => {
-    this.props.navigation.navigate('PhotoScreen', {
+    this.props.navigation.navigate('Photo', {
       // Navigation target
       album: album, // Send params
     });
@@ -74,11 +74,6 @@ export default class AlbumScreen extends Component {
   };
 
   render() {
-    const imgbg = {
-      uri:
-        'https://images.unsplash.com/photo-1587358538793-a4d9b21f5dcf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80',
-    };
-
     if (this.state.isLoading) {
       return (
         <View style={{flex: 1, padding: 20}}>
@@ -113,6 +108,8 @@ export default class AlbumScreen extends Component {
   }
 }
 
+
+
 const style = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
@@ -131,3 +128,5 @@ const style = StyleSheet.create({
     flex: 5,
   },
 });
+
+export default AlbumScreen;
